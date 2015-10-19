@@ -69,7 +69,7 @@ module Retryable
         raise
       rescue *on_exception => exception
         raise unless configuration.enabled?
-        raise unless exception.message =~ opts[:matching]
+        raise unless exception.message.to_s =~ opts[:matching]
         raise if retries+1 >= tries
 
         # Interrupt Exception could be raised while sleeping
